@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, usePage, router } from '@inertiajs/react';
-import { QrCode, ShieldCheck, GraduationCap, LayoutDashboard, Flag, LogIn, LogOut, UserCheck } from 'lucide-react';
+import { QrCode, ShieldCheck, GraduationCap, LayoutDashboard, Flag, LogIn, LogOut, UserCheck, KeyRound } from 'lucide-react';
+import ChangePasswordModal from './ChangePasswordModal';
 
 export default function Navbar({ active = 'student', onOpenQr }) {
     const { auth } = usePage().props;
     const user = auth?.user;
+    const [passwordModalOpen, setPasswordModalOpen] = useState(false);
 
     const handleLogout = () => {
         router.post('/logout');
@@ -66,6 +68,15 @@ export default function Navbar({ active = 'student', onOpenQr }) {
                                 </Link>
 
                                 <button
+                                    onClick={() => setPasswordModalOpen(true)}
+                                    className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 transition-all cursor-pointer"
+                                    title="Change Admin Password"
+                                >
+                                    <KeyRound className="w-3.5 h-3.5 text-[#C1AA3F]" />
+                                    <span className="hidden sm:inline">Password</span>
+                                </button>
+
+                                <button
                                     onClick={handleLogout}
                                     className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-xl text-xs font-semibold text-rose-600 hover:bg-rose-50 border border-rose-200 transition-all cursor-pointer"
                                     title="Sign out of admin session"
@@ -87,6 +98,12 @@ export default function Navbar({ active = 'student', onOpenQr }) {
                     </div>
                 </div>
             </div>
+
+            {/* Change Password Modal for Admin */}
+            <ChangePasswordModal
+                isOpen={passwordModalOpen}
+                onClose={() => setPasswordModalOpen(false)}
+            />
         </header>
     );
 }

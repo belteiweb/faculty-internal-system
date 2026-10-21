@@ -31,4 +31,5 @@ Route::prefix('controller')->name('controller.')->middleware('auth')->group(func
     Route::get('/dashboard', [ThesisController::class, 'dashboard'])->name('dashboard');
     Route::get('/reports', [ThesisController::class, 'reports'])->name('reports');
     Route::patch('/reports/{id}', [ThesisController::class, 'updateReportStatus'])->name('reports.update');
+    Route::post('/password', [AuthController::class, 'updatePassword'])->name('password.update');
 });

@@ -1,21 +1,17 @@
 import React from 'react';
 import { useForm, Head, Link } from '@inertiajs/react';
-import { GraduationCap, Lock, Mail, ArrowRight, ShieldCheck, Sparkles, AlertCircle } from 'lucide-react';
+import { Lock, Mail, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react';
 
 export default function Login() {
     const { data, setData, post, processing, errors } = useForm({
-        email: 'admin@beltei.edu.kh',
-        password: 'password123',
-        remember: true,
+        email: '',
+        password: '',
+        remember: false,
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         post('/login');
-    };
-
-    const fillCredentials = (email, pass) => {
-        setData((prev) => ({ ...prev, email, password: pass }));
     };
 
     return (
@@ -72,9 +68,10 @@ export default function Login() {
                                 <input
                                     type="email"
                                     required
+                                    autoComplete="email"
                                     value={data.email}
                                     onChange={(e) => setData('email', e.target.value)}
-                                    placeholder="admin@beltei.edu.kh"
+                                    placeholder="your-email@beltei.edu.kh"
                                     className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#C1AA3F] focus:ring-2 focus:ring-[#C1AA3F]/20 transition-all font-mono"
                                 />
                             </div>
@@ -91,6 +88,7 @@ export default function Login() {
                                 <input
                                     type="password"
                                     required
+                                    autoComplete="current-password"
                                     value={data.password}
                                     onChange={(e) => setData('password', e.target.value)}
                                     placeholder="••••••••••••"
@@ -120,30 +118,6 @@ export default function Login() {
                             <ArrowRight className="w-4 h-4" />
                         </button>
                     </form>
-
-                    {/* Quick Demo Credentials Autofill */}
-                    <div className="mt-6 pt-5 border-t border-slate-100">
-                        <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2.5">
-                            <Sparkles className="w-3.5 h-3.5 text-[#C1AA3F]" />
-                            <span>Faculty Demo Account</span>
-                        </div>
-                        <div
-                            onClick={() => fillCredentials('admin@beltei.edu.kh', 'password123')}
-                            className="p-3 rounded-xl bg-slate-50 border border-slate-200 hover:border-[#C1AA3F]/50 hover:bg-[#C1AA3F]/5 transition-all cursor-pointer group flex items-center justify-between"
-                        >
-                            <div className="text-left font-mono text-xs">
-                                <span className="text-slate-800 block group-hover:text-[#88742b] transition-colors font-bold">
-                                    admin@beltei.edu.kh
-                                </span>
-                                <span className="text-[11px] text-slate-500">
-                                    Password: password123
-                                </span>
-                            </div>
-                            <span className="text-[11px] px-2.5 py-1 rounded-lg bg-[#C1AA3F]/15 text-[#88742b] font-bold group-hover:bg-[#C1AA3F] group-hover:text-slate-900 transition-all border border-[#C1AA3F]/30">
-                                Auto-fill
-                            </span>
-                        </div>
-                    </div>
                 </div>
 
                 <div className="text-center mt-6">

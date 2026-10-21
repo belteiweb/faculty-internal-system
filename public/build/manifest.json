@@ -1,48 +1,41 @@
 {
-  "_Navbar-BpKdgAKj.js": {
-    "file": "assets/Navbar-BpKdgAKj.js",
+  "_Navbar-CaPT4PjW.js": {
+    "file": "assets/Navbar-CaPT4PjW.js",
     "name": "Navbar",
     "imports": [
-      "_createLucideIcon-EzzRVAey.js",
+      "_lock-DH08gSQt.js",
       "resources/js/app.jsx"
     ]
   },
-  "_StudentDetailModal-BrwiJSSr.js": {
-    "file": "assets/StudentDetailModal-BrwiJSSr.js",
+  "_StudentDetailModal-DF8_0-hM.js": {
+    "file": "assets/StudentDetailModal-DF8_0-hM.js",
     "name": "StudentDetailModal",
     "imports": [
-      "_createLucideIcon-EzzRVAey.js",
+      "_lock-DH08gSQt.js",
       "resources/js/app.jsx",
-      "_Navbar-BpKdgAKj.js",
-      "_shield-check-DtwMk43T.js"
+      "_Navbar-CaPT4PjW.js",
+      "_shield-check-tD467y8h.js"
     ]
   },
-  "_circle-alert-BcKFi7ey.js": {
-    "file": "assets/circle-alert-BcKFi7ey.js",
+  "_circle-alert-DK4GTDHs.js": {
+    "file": "assets/circle-alert-DK4GTDHs.js",
     "name": "circle-alert",
     "imports": [
-      "_createLucideIcon-EzzRVAey.js"
+      "_lock-DH08gSQt.js"
     ]
   },
-  "_createLucideIcon-EzzRVAey.js": {
-    "file": "assets/createLucideIcon-EzzRVAey.js",
-    "name": "createLucideIcon",
+  "_lock-DH08gSQt.js": {
+    "file": "assets/lock-DH08gSQt.js",
+    "name": "lock",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_shield-check-DtwMk43T.js": {
-    "file": "assets/shield-check-DtwMk43T.js",
+  "_shield-check-tD467y8h.js": {
+    "file": "assets/shield-check-tD467y8h.js",
     "name": "shield-check",
     "imports": [
-      "_createLucideIcon-EzzRVAey.js"
-    ]
-  },
-  "_sparkles-n39VWaP8.js": {
-    "file": "assets/sparkles-n39VWaP8.js",
-    "name": "sparkles",
-    "imports": [
-      "_createLucideIcon-EzzRVAey.js"
+      "_lock-DH08gSQt.js"
     ]
   },
   "resources/css/app.css": {
@@ -55,71 +48,69 @@
     ]
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-DCH13NaQ.js",
+    "file": "assets/Login-DlBBvtkX.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_shield-check-DtwMk43T.js",
-      "_circle-alert-BcKFi7ey.js",
-      "_createLucideIcon-EzzRVAey.js",
-      "_sparkles-n39VWaP8.js"
+      "_shield-check-tD467y8h.js",
+      "_circle-alert-DK4GTDHs.js",
+      "_lock-DH08gSQt.js"
     ],
     "css": [
       "assets/app-DHpuBbW3.css"
     ]
   },
   "resources/js/Pages/Controller/Dashboard.jsx": {
-    "file": "assets/Dashboard-CFDWigdd.js",
+    "file": "assets/Dashboard-BKHKPD1i.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Controller/Dashboard.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-BpKdgAKj.js",
-      "_StudentDetailModal-BrwiJSSr.js",
-      "_createLucideIcon-EzzRVAey.js",
-      "_sparkles-n39VWaP8.js",
-      "_shield-check-DtwMk43T.js"
+      "_Navbar-CaPT4PjW.js",
+      "_StudentDetailModal-DF8_0-hM.js",
+      "_lock-DH08gSQt.js",
+      "_shield-check-tD467y8h.js"
     ],
     "css": [
       "assets/app-DHpuBbW3.css"
     ]
   },
   "resources/js/Pages/Controller/Reports.jsx": {
-    "file": "assets/Reports-oKGdE85A.js",
+    "file": "assets/Reports-CrzUBb3u.js",
     "name": "Reports",
     "src": "resources/js/Pages/Controller/Reports.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-BpKdgAKj.js",
-      "_createLucideIcon-EzzRVAey.js"
+      "_Navbar-CaPT4PjW.js",
+      "_lock-DH08gSQt.js"
     ],
     "css": [
       "assets/app-DHpuBbW3.css"
     ]
   },
   "resources/js/Pages/Thesis/Index.jsx": {
-    "file": "assets/Index-Ck6rXUCX.js",
+    "file": "assets/Index-BTUkT1ez.js",
     "name": "Index",
     "src": "resources/js/Pages/Thesis/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-BpKdgAKj.js",
-      "_StudentDetailModal-BrwiJSSr.js",
-      "_createLucideIcon-EzzRVAey.js",
-      "_circle-alert-BcKFi7ey.js",
-      "_shield-check-DtwMk43T.js"
+      "_Navbar-CaPT4PjW.js",
+      "_lock-DH08gSQt.js",
+      "_StudentDetailModal-DF8_0-hM.js",
+      "_circle-alert-DK4GTDHs.js",
+      "_shield-check-tD467y8h.js"
     ],
     "css": [
       "assets/app-DHpuBbW3.css"
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-DrDHh2jk.js",
+    "file": "assets/app-lMXVI9V3.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
