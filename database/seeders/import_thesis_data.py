@@ -71,7 +71,7 @@ def main():
     base_dir = r"D:\Project\Faculty-System"
     doc_dir = os.path.join(base_dir, "thesis-controller", "document")
     topic_file = os.path.join(doc_dir, "List", "List Supervisor and Supervisees with Topic.xlsx")
-    result_file = os.path.join(doc_dir, "Result", "Thesis Result - Copy.xlsx")
+    result_file = os.path.join(doc_dir, "Result", "Thesis Result - Copy (2).xlsx")
     
     print(f"Loading topic file: {topic_file}")
     wb_topic = openpyxl.load_workbook(topic_file, data_only=True)
