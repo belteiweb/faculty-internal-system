@@ -1,0 +1,136 @@
+{
+  "_Navbar-BpKdgAKj.js": {
+    "file": "assets/Navbar-BpKdgAKj.js",
+    "name": "Navbar",
+    "imports": [
+      "_createLucideIcon-EzzRVAey.js",
+      "resources/js/app.jsx"
+    ]
+  },
+  "_StudentDetailModal-BrwiJSSr.js": {
+    "file": "assets/StudentDetailModal-BrwiJSSr.js",
+    "name": "StudentDetailModal",
+    "imports": [
+      "_createLucideIcon-EzzRVAey.js",
+      "resources/js/app.jsx",
+      "_Navbar-BpKdgAKj.js",
+      "_shield-check-DtwMk43T.js"
+    ]
+  },
+  "_circle-alert-BcKFi7ey.js": {
+    "file": "assets/circle-alert-BcKFi7ey.js",
+    "name": "circle-alert",
+    "imports": [
+      "_createLucideIcon-EzzRVAey.js"
+    ]
+  },
+  "_createLucideIcon-EzzRVAey.js": {
+    "file": "assets/createLucideIcon-EzzRVAey.js",
+    "name": "createLucideIcon",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_shield-check-DtwMk43T.js": {
+    "file": "assets/shield-check-DtwMk43T.js",
+    "name": "shield-check",
+    "imports": [
+      "_createLucideIcon-EzzRVAey.js"
+    ]
+  },
+  "_sparkles-n39VWaP8.js": {
+    "file": "assets/sparkles-n39VWaP8.js",
+    "name": "sparkles",
+    "imports": [
+      "_createLucideIcon-EzzRVAey.js"
+    ]
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-DHpuBbW3.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/Pages/Auth/Login.jsx": {
+    "file": "assets/Login-DCH13NaQ.js",
+    "name": "Login",
+    "src": "resources/js/Pages/Auth/Login.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_shield-check-DtwMk43T.js",
+      "_circle-alert-BcKFi7ey.js",
+      "_createLucideIcon-EzzRVAey.js",
+      "_sparkles-n39VWaP8.js"
+    ],
+    "css": [
+      "assets/app-DHpuBbW3.css"
+    ]
+  },
+  "resources/js/Pages/Controller/Dashboard.jsx": {
+    "file": "assets/Dashboard-CFDWigdd.js",
+    "name": "Dashboard",
+    "src": "resources/js/Pages/Controller/Dashboard.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_Navbar-BpKdgAKj.js",
+      "_StudentDetailModal-BrwiJSSr.js",
+      "_createLucideIcon-EzzRVAey.js",
+      "_sparkles-n39VWaP8.js",
+      "_shield-check-DtwMk43T.js"
+    ],
+    "css": [
+      "assets/app-DHpuBbW3.css"
+    ]
+  },
+  "resources/js/Pages/Controller/Reports.jsx": {
+    "file": "assets/Reports-oKGdE85A.js",
+    "name": "Reports",
+    "src": "resources/js/Pages/Controller/Reports.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_Navbar-BpKdgAKj.js",
+      "_createLucideIcon-EzzRVAey.js"
+    ],
+    "css": [
+      "assets/app-DHpuBbW3.css"
+    ]
+  },
+  "resources/js/Pages/Thesis/Index.jsx": {
+    "file": "assets/Index-Ck6rXUCX.js",
+    "name": "Index",
+    "src": "resources/js/Pages/Thesis/Index.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_Navbar-BpKdgAKj.js",
+      "_StudentDetailModal-BrwiJSSr.js",
+      "_createLucideIcon-EzzRVAey.js",
+      "_circle-alert-BcKFi7ey.js",
+      "_shield-check-DtwMk43T.js"
+    ],
+    "css": [
+      "assets/app-DHpuBbW3.css"
+    ]
+  },
+  "resources/js/app.jsx": {
+    "file": "assets/app-DrDHh2jk.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/Pages/Auth/Login.jsx",
+      "resources/js/Pages/Controller/Dashboard.jsx",
+      "resources/js/Pages/Controller/Reports.jsx",
+      "resources/js/Pages/Thesis/Index.jsx"
+    ],
+    "css": [
+      "assets/app-DHpuBbW3.css"
+    ]
+  }
+}

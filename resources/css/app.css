@@ -1,0 +1,84 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+@source '../**/*.jsx';
+
+@theme {
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+    --font-khmer: 'Kantumruy Pro', ui-sans-serif, system-ui, sans-serif;
+    
+    /* BELTEI University & Faculty of IT (FITS) Brand Colors */
+    --color-beltei-navy: #1c4482;
+    --color-beltei-blue: #00a2e8;
+    --color-beltei-red: #e31b23;
+    --color-faculty: #C1AA3F;
+    --color-faculty-light: #D8C359;
+    --color-faculty-dark: #A48F2F;
+    --color-faculty-50: #fcfbf6;
+    --color-faculty-100: #f8f4e6;
+    --color-faculty-200: #f0e6c6;
+    --color-faculty-300: #e5d39e;
+    --color-faculty-400: #d6be73;
+    --color-faculty-500: #C1AA3F;
+}
+
+.font-khmer {
+    font-family: 'Kantumruy Pro', 'Battambang', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(193, 170, 63, 0.45);
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(193, 170, 63, 0.8);
+}
+
+/* Crisp Clean Light Mode Panels & Cards */
+.light-panel {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+.light-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+.light-card-hover {
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.light-card-hover:hover {
+    border-color: #C1AA3F;
+    box-shadow: 0 8px 24px -4px rgba(193, 170, 63, 0.15), 0 2px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Faculty Gold Glow */
+.glow-faculty {
+    box-shadow: 0 4px 20px -2px rgba(193, 170, 63, 0.35);
+}
+
+.glow-emerald {
+    box-shadow: 0 4px 20px -2px rgba(16, 185, 129, 0.25);
+}
+
+/* Active Stamp badge */
+.stamp-badge {
+    border: 2px dashed #C1AA3F;
+    background: #fbf9ef;
+    color: #88742b;
+}
