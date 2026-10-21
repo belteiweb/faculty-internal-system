@@ -14,3 +14,6 @@
 Homestead.json
 Homestead.yaml
 Thumbs.db
+database/*.sqlite
+database/*.sqlite-wal
+database/*.sqlite-shm
