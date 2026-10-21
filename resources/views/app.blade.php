@@ -39,7 +39,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/beltei-logo.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/beltei-logo.png') }}">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/beltei-logo.png') }}">
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
 
         <!-- Google Fonts: Plus Jakarta Sans, Outfit, & Kantumruy Pro (Modern Khmer) -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
