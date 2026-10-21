@@ -1,41 +1,41 @@
 {
-  "_Navbar-CsNGIUbE.js": {
-    "file": "assets/Navbar-CsNGIUbE.js",
+  "_Navbar-COSBe5-L.js": {
+    "file": "assets/Navbar-COSBe5-L.js",
     "name": "Navbar",
     "imports": [
-      "_lock-Dbn5Toa4.js",
+      "_lock-DVDlkKVf.js",
       "resources/js/app.jsx"
     ]
   },
-  "_StudentDetailModal-Bom95K1I.js": {
-    "file": "assets/StudentDetailModal-Bom95K1I.js",
+  "_StudentDetailModal-D3egeYUK.js": {
+    "file": "assets/StudentDetailModal-D3egeYUK.js",
     "name": "StudentDetailModal",
     "imports": [
-      "_lock-Dbn5Toa4.js",
+      "_lock-DVDlkKVf.js",
       "resources/js/app.jsx",
-      "_Navbar-CsNGIUbE.js",
-      "_shield-check-B2V4oMhM.js"
+      "_Navbar-COSBe5-L.js",
+      "_shield-check-C11sow9q.js"
     ]
   },
-  "_circle-alert-DNu5Ha_O.js": {
-    "file": "assets/circle-alert-DNu5Ha_O.js",
+  "_circle-alert-1fnudI_o.js": {
+    "file": "assets/circle-alert-1fnudI_o.js",
     "name": "circle-alert",
     "imports": [
-      "_lock-Dbn5Toa4.js"
+      "_lock-DVDlkKVf.js"
     ]
   },
-  "_lock-Dbn5Toa4.js": {
-    "file": "assets/lock-Dbn5Toa4.js",
+  "_lock-DVDlkKVf.js": {
+    "file": "assets/lock-DVDlkKVf.js",
     "name": "lock",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_shield-check-B2V4oMhM.js": {
-    "file": "assets/shield-check-B2V4oMhM.js",
+  "_shield-check-C11sow9q.js": {
+    "file": "assets/shield-check-C11sow9q.js",
     "name": "shield-check",
     "imports": [
-      "_lock-Dbn5Toa4.js"
+      "_lock-DVDlkKVf.js"
     ]
   },
   "resources/css/app.css": {
@@ -48,69 +48,69 @@
     ]
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-Cm4oH6MT.js",
+    "file": "assets/Login-DLI9P9GO.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_shield-check-B2V4oMhM.js",
-      "_circle-alert-DNu5Ha_O.js",
-      "_lock-Dbn5Toa4.js"
+      "_shield-check-C11sow9q.js",
+      "_circle-alert-1fnudI_o.js",
+      "_lock-DVDlkKVf.js"
     ],
     "css": [
       "assets/app-DOVvf4Jy.css"
     ]
   },
   "resources/js/Pages/Controller/Dashboard.jsx": {
-    "file": "assets/Dashboard-DOGo22_s.js",
+    "file": "assets/Dashboard-CV2mLfG-.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Controller/Dashboard.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-CsNGIUbE.js",
-      "_StudentDetailModal-Bom95K1I.js",
-      "_lock-Dbn5Toa4.js",
-      "_shield-check-B2V4oMhM.js"
+      "_Navbar-COSBe5-L.js",
+      "_StudentDetailModal-D3egeYUK.js",
+      "_lock-DVDlkKVf.js",
+      "_shield-check-C11sow9q.js"
     ],
     "css": [
       "assets/app-DOVvf4Jy.css"
     ]
   },
   "resources/js/Pages/Controller/Reports.jsx": {
-    "file": "assets/Reports-ogvu8Gj5.js",
+    "file": "assets/Reports-Cr5RxnoL.js",
     "name": "Reports",
     "src": "resources/js/Pages/Controller/Reports.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-CsNGIUbE.js",
-      "_lock-Dbn5Toa4.js"
+      "_Navbar-COSBe5-L.js",
+      "_lock-DVDlkKVf.js"
     ],
     "css": [
       "assets/app-DOVvf4Jy.css"
     ]
   },
   "resources/js/Pages/Thesis/Index.jsx": {
-    "file": "assets/Index-BH86VKQg.js",
+    "file": "assets/Index-gdDSZYFC.js",
     "name": "Index",
     "src": "resources/js/Pages/Thesis/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-CsNGIUbE.js",
-      "_lock-Dbn5Toa4.js",
-      "_StudentDetailModal-Bom95K1I.js",
-      "_circle-alert-DNu5Ha_O.js",
-      "_shield-check-B2V4oMhM.js"
+      "_Navbar-COSBe5-L.js",
+      "_lock-DVDlkKVf.js",
+      "_StudentDetailModal-D3egeYUK.js",
+      "_circle-alert-1fnudI_o.js",
+      "_shield-check-C11sow9q.js"
     ],
     "css": [
       "assets/app-DOVvf4Jy.css"
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-D5BO-YAG.js",
+    "file": "assets/app-DFrr2zKn.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
