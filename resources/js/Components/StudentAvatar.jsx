@@ -11,12 +11,27 @@ export default function StudentAvatar({
 }) {
     const [imgError, setImgError] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
+    const [useRemoteFallback, setUseRemoteFallback] = useState(false);
 
     if (!student) return null;
 
     // UMS student photo format: 8-digit zero-padded student ID
     const studentIdCode = student.student_id_formatted || String(student.student_id || '').padStart(8, '0');
-    const photoUrl = `https://ums.beltei.edu.kh/storage/uploads/images/students/${studentIdCode}.jpg`;
+    
+    // Priority: Local downloaded & compressed image (works outside internal network)
+    // Fallback: Remote UMS URL if local file is missing
+    const localPhotoUrl = `/images/students/${studentIdCode}.jpg`;
+    const remotePhotoUrl = `https://ums.beltei.edu.kh/storage/uploads/images/students/${studentIdCode}.jpg`;
+    const photoUrl = useRemoteFallback ? remotePhotoUrl : localPhotoUrl;
+
+    const handleImgError = () => {
+        if (!useRemoteFallback) {
+            setUseRemoteFallback(true);
+            setImgLoaded(false);
+        } else {
+            setImgError(true);
+        }
+    };
 
     const sizeClasses = {
         sm: 'w-10 h-10 rounded-xl text-xs',
@@ -49,11 +64,12 @@ export default function StudentAvatar({
                         </div>
                     )}
                     <img
+                        key={photoUrl}
                         src={photoUrl}
                         alt={`${student.name_latin}`}
                         loading="lazy"
                         onLoad={() => setImgLoaded(true)}
-                        onError={() => setImgError(true)}
+                        onError={handleImgError}
                         className={`w-full h-full object-cover transition-all duration-300 ${
                             imgLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
                         } ${zoomable ? 'group-hover:scale-105' : ''}`}
