@@ -14,8 +14,224 @@ export default function QrModal({ isOpen, onClose, url }) {
 
     const targetUrl = url || (typeof window !== 'undefined' ? `${window.location.origin}/thesis` : '/thesis');
 
+    const [isPrinting, setIsPrinting] = useState(false);
+
     const handlePrint = () => {
-        window.print();
+        try {
+            setIsPrinting(true);
+            const qrSvgElement = document.getElementById('poster-qr-code-svg');
+            const qrSvgHtml = qrSvgElement ? qrSvgElement.innerHTML : '';
+
+            // Remove previous iframe if present
+            const oldIframe = document.getElementById('qr-print-isolated-frame');
+            if (oldIframe) {
+                oldIframe.remove();
+            }
+
+            const iframe = document.createElement('iframe');
+            iframe.id = 'qr-print-isolated-frame';
+            iframe.style.position = 'fixed';
+            iframe.style.top = '-9999px';
+            iframe.style.left = '-9999px';
+            iframe.style.width = '0px';
+            iframe.style.height = '0px';
+            iframe.style.border = 'none';
+            document.body.appendChild(iframe);
+
+            const logoSrc = `${window.location.origin}/images/beltei-logo.png`;
+
+            const printHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>${headerText || 'Thesis Sign-in Poster'}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 1.2cm;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            background: #ffffff;
+            color: #0f172a;
+            font-family: 'Kantumruy Pro', 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+            width: 100%;
+            height: 100%;
+        }
+        .page-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 94vh;
+            padding: 10px;
+        }
+        .poster-card {
+            width: 100%;
+            max-width: 520px;
+            border: 2.5px solid #0f172a;
+            border-radius: 28px;
+            padding: 36px 30px;
+            text-align: center;
+            background: #ffffff;
+        }
+        .crest-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            padding-bottom: 16px;
+            border-bottom: 1.5px solid #e2e8f0;
+            margin-bottom: 20px;
+        }
+        .crest-img {
+            width: 58px;
+            height: 68px;
+            object-fit: contain;
+        }
+        .crest-titles {
+            text-align: left;
+        }
+        .crest-kh {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.3;
+        }
+        .crest-en {
+            font-size: 11.5px;
+            font-weight: 800;
+            color: #1c4482;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .crest-sub {
+            font-size: 10px;
+            font-weight: 600;
+            color: #475569;
+            margin-top: 2px;
+        }
+        .faculty-badge {
+            display: inline-block;
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            color: #0369a1;
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 4px 14px;
+            border-radius: 9999px;
+            margin-bottom: 14px;
+        }
+        .poster-title {
+            font-size: 23px;
+            font-weight: 800;
+            color: #020617;
+            line-height: 1.38;
+            margin-bottom: 10px;
+            padding: 0 4px;
+        }
+        .poster-subtext {
+            font-size: 12.5px;
+            font-weight: 500;
+            color: #334155;
+            line-height: 1.6;
+            max-width: 420px;
+            margin: 0 auto 20px auto;
+        }
+        .qr-wrapper {
+            display: inline-block;
+            padding: 16px;
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: 22px;
+            margin-bottom: 18px;
+        }
+        .qr-wrapper svg {
+            display: block;
+            width: 230px;
+            height: 230px;
+        }
+        .url-pill {
+            display: inline-block;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 11.5px;
+            font-weight: 600;
+            color: #0f172a;
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 6px 14px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            word-break: break-all;
+        }
+        .poster-footnote {
+            font-size: 11px;
+            color: #64748b;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <div class="poster-card">
+            <div class="crest-header">
+                <img src="${logoSrc}" class="crest-img" alt="BELTEI" onerror="this.style.display='none'">
+                <div class="crest-titles">
+                    <div class="crest-kh">សាកលវិទ្យាល័យ ប៊ែលធី អន្តរជាតិ</div>
+                    <div class="crest-en">BELTEI International University</div>
+                    <div class="crest-sub">Faculty of Information Technology</div>
+                </div>
+            </div>
+
+            <div class="faculty-badge">Faculty of Information Technology</div>
+
+            <h1 class="poster-title">${headerText}</h1>
+
+            ${subText ? `<p class="poster-subtext">${subText}</p>` : ''}
+
+            <div class="qr-wrapper">
+                ${qrSvgHtml}
+            </div>
+
+            <div>
+                <div class="url-pill">${targetUrl}</div>
+                <div class="poster-footnote">
+                    ស្វែងរកឈ្មោះ • ពិនិត្យប្រធានបទ និងពិន្ទុការពារសារណា • បញ្ជាក់ហត្ថលេខាផ្ទាល់
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+            `;
+
+            const doc = iframe.contentWindow.document;
+            doc.open();
+            doc.write(printHtml);
+            doc.close();
+
+            // Allow brief timeout for browser to finish document parsing
+            setTimeout(() => {
+                setIsPrinting(false);
+                iframe.contentWindow.focus();
+                iframe.contentWindow.print();
+            }, 300);
+        } catch (err) {
+            console.error('Print error:', err);
+            setIsPrinting(false);
+            window.print();
+        }
     };
 
     const presets = [
@@ -42,48 +258,12 @@ export default function QrModal({ isOpen, onClose, url }) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-150 overflow-y-auto print:p-0 print:bg-white print:static print:block">
-            {/* Scoped print styles ensuring only the poster prints cleanly */}
-            <style>
-                {`
-                @media print {
-                    @page {
-                        size: A4 portrait;
-                        margin: 1.5cm;
-                    }
-                    body {
-                        background: #fff !important;
-                        color: #000 !important;
-                    }
-                    body * {
-                        visibility: hidden !important;
-                    }
-                    #printable-qr-poster, #printable-qr-poster * {
-                        visibility: visible !important;
-                    }
-                    #printable-qr-poster {
-                        position: fixed !important;
-                        left: 50% !important;
-                        top: 50% !important;
-                        transform: translate(-50%, -50%) !important;
-                        width: 100% !important;
-                        max-width: 480px !important;
-                        border: 2px solid #0f172a !important;
-                        border-radius: 24px !important;
-                        padding: 32px 24px !important;
-                        background: #ffffff !important;
-                        box-shadow: none !important;
-                    }
-                }
-                `}
-            </style>
-
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-150 overflow-y-auto">
             <div
-                id="printable-qr-poster"
-                className="relative w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden print:border-2 print:border-slate-900 print:shadow-none print:bg-white print:text-black"
+                className="relative w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden text-slate-100"
             >
-                {/* Header Toolbar (hidden in print) */}
-                <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-800 bg-slate-800/40 print:hidden">
+                {/* Header Toolbar */}
+                <div className="flex items-center justify-between px-5 py-3.5 border-b border-slate-800 bg-slate-800/40">
                     <div className="flex items-center gap-2 text-white font-semibold text-sm sm:text-base">
                         <QrCode className="w-5 h-5 text-sky-400" />
                         <span>Student QR Code Scanner</span>
@@ -110,9 +290,9 @@ export default function QrModal({ isOpen, onClose, url }) {
                     </div>
                 </div>
 
-                {/* Customization Drawer (hidden in print) */}
+                {/* Customization Drawer */}
                 {isCustomizing && (
-                    <div className="p-4 bg-slate-800/60 border-b border-slate-700/70 space-y-3 text-xs print:hidden animate-in fade-in duration-150">
+                    <div className="p-4 bg-slate-800/60 border-b border-slate-700/70 space-y-3 text-xs animate-in fade-in duration-150">
                         <div className="space-y-1">
                             <label className="text-slate-300 font-semibold block">
                                 Header Title / ចំណងជើងធំ:
@@ -173,48 +353,28 @@ export default function QrModal({ isOpen, onClose, url }) {
                     </div>
                 )}
 
-                {/* Printable Content */}
-                <div className="p-6 text-center space-y-4 print:p-0 print:space-y-3">
-                    {/* Official University Crest in Print */}
-                    <div className="hidden print:flex items-center justify-center gap-3 pb-2 border-b border-slate-200">
-                        <img
-                            src="/images/beltei-logo.png"
-                            alt="BELTEI International University"
-                            className="w-14 h-16 object-contain"
-                        />
-                        <div className="text-left">
-                            <h3 className="font-khmer font-bold text-sm text-slate-900 leading-tight">
-                                សាកលវិទ្យាល័យ ប៊ែលធី អន្តរជាតិ
-                            </h3>
-                            <h4 className="font-extrabold text-xs text-[#1c4482] tracking-wider uppercase">
-                                BELTEI International University
-                            </h4>
-                            <p className="text-[10px] text-slate-600 font-medium">
-                                Faculty of Information Technology
-                            </p>
-                        </div>
-                    </div>
-
+                {/* Poster Preview Content */}
+                <div className="p-6 text-center space-y-4">
                     <div className="space-y-1.5">
-                        <span className="inline-block text-[11px] uppercase font-bold tracking-widest text-sky-400 bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20 print:border-slate-300 print:text-slate-800 print:bg-slate-100">
+                        <span className="inline-block text-[11px] uppercase font-bold tracking-widest text-sky-400 bg-sky-500/10 px-3 py-1 rounded-full border border-sky-500/20">
                             Faculty of Information Technology
                         </span>
                         
                         {/* Main Header (Customizable) */}
-                        <h2 className="text-xl sm:text-2xl font-bold font-khmer text-white print:text-slate-950 pt-1 leading-snug px-2">
+                        <h2 className="text-xl sm:text-2xl font-bold font-khmer text-white pt-1 leading-snug px-2">
                             {headerText}
                         </h2>
 
                         {/* Subtext */}
                         {subText && (
-                            <p className="text-xs text-slate-300 print:text-slate-700 font-khmer leading-relaxed max-w-sm mx-auto px-2">
+                            <p className="text-xs text-slate-300 font-khmer leading-relaxed max-w-sm mx-auto px-2">
                                 {subText}
                             </p>
                         )}
                     </div>
 
                     {/* QR Code Container */}
-                    <div className="inline-block p-4 rounded-2xl bg-white shadow-xl ring-4 ring-sky-500/20 mx-auto print:ring-0 print:shadow-none print:border print:border-slate-200">
+                    <div id="poster-qr-code-svg" className="inline-block p-4 rounded-2xl bg-white shadow-xl ring-4 ring-sky-500/20 mx-auto">
                         <QRCodeSVG
                             value={targetUrl}
                             size={220}
@@ -223,23 +383,24 @@ export default function QrModal({ isOpen, onClose, url }) {
                         />
                     </div>
 
-                    <div className="text-xs text-slate-400 print:text-slate-700 space-y-1">
-                        <div className="font-mono bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 inline-block text-[11px] text-sky-400 print:bg-slate-100 print:text-slate-900 print:border-slate-300">
+                    <div className="text-xs text-slate-400 space-y-1">
+                        <div className="font-mono bg-slate-950 px-3 py-1.5 rounded-lg border border-slate-800 inline-block text-[11px] text-sky-400">
                             {targetUrl}
                         </div>
-                        <p className="text-[11px] text-slate-400 print:text-slate-600 font-khmer">
+                        <p className="text-[11px] text-slate-400 font-khmer">
                             ស្វែងរកឈ្មោះ • ពិនិត្យប្រធានបទ និងពិន្ទុការពារសារណា • បញ្ជាក់ហត្ថលេខាផ្ទាល់
                         </p>
                     </div>
 
-                    {/* Actions Toolbar (hidden in print) */}
-                    <div className="flex items-center justify-center gap-2 pt-3 border-t border-slate-800 print:hidden">
+                    {/* Actions Toolbar */}
+                    <div className="flex items-center justify-center gap-2 pt-3 border-t border-slate-800">
                         <button
                             onClick={handlePrint}
-                            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-sky-500 hover:bg-sky-400 text-slate-950 transition-colors shadow-lg shadow-sky-500/20 cursor-pointer"
+                            disabled={isPrinting}
+                            className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-sky-500 hover:bg-sky-400 disabled:opacity-50 text-slate-950 transition-colors shadow-lg shadow-sky-500/20 cursor-pointer"
                         >
                             <Printer className="w-4 h-4" />
-                            <span>Print Sign-in Poster</span>
+                            <span>{isPrinting ? 'Preparing Poster...' : 'Print Sign-in Poster'}</span>
                         </button>
                         <button
                             onClick={() => window.open(targetUrl, '_blank')}
