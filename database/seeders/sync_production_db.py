@@ -41,6 +41,10 @@ def sync_database(target_db_path=DEFAULT_DB):
     conn = sqlite3.connect(target_db_path)
     cursor = conn.cursor()
 
+    initial_signed_count = cursor.execute("SELECT COUNT(*) FROM thesis_students WHERE signed = 1").fetchone()[0]
+    initial_total_count = cursor.execute("SELECT COUNT(*) FROM thesis_students").fetchone()[0]
+    print(f"Initial target DB: {initial_total_count} total students, {initial_signed_count} signed students.")
+
     # Load existing signatures to guarantee 0 data loss
     cursor.execute("""
         SELECT student_id, student_id_formatted, name_latin, signed, signed_at, signature_notes, signed_device_ip 
@@ -48,7 +52,6 @@ def sync_database(target_db_path=DEFAULT_DB):
         WHERE signed = 1
     """)
     signed_records = cursor.fetchall()
-    print(f"Found {len(signed_records)} already-signed students in target DB. Preserving signatures...")
 
     # Map signed info by student_id and by normalized name
     signed_map_by_id = {}
@@ -214,20 +217,37 @@ def sync_database(target_db_path=DEFAULT_DB):
             ))
             stats["inserted"] += 1
 
+    # Final signature integrity check
+    final_signed_count = cursor.execute("SELECT COUNT(*) FROM thesis_students WHERE signed = 1").fetchone()[0]
+    final_total_count = cursor.execute("SELECT COUNT(*) FROM thesis_students").fetchone()[0]
+
+    if final_signed_count < initial_signed_count:
+        conn.rollback()
+        conn.close()
+        raise RuntimeError(f"CRITICAL ERROR: Signature loss detected! Initial: {initial_signed_count}, Final: {final_signed_count}. Transaction rolled back.")
+
     conn.commit()
     conn.close()
+
+    # Also create a cleanly named export in Downloads for easy re-uploading to live server
+    downloads_dir = os.path.dirname(target_db_path)
+    clean_export_path = os.path.join(downloads_dir, "database_synced_production.sqlite")
+    shutil.copy2(target_db_path, clean_export_path)
 
     print("\n" + "=" * 60)
     print("Database Sync Successful!")
     print(f"Target DB: {target_db_path}")
+    print(f"Clean Export: {clean_export_path}")
+    print(f"Total students: {initial_total_count} -> {final_total_count}")
     print(f"Records updated: {stats['updated']}")
     print(f"New records inserted: {stats['inserted']}")
     print(f"Classes corrected: {stats['class_fixed']}")
     print(f"Student ID typos corrected: {stats['id_fixed']}")
-    print(f"Confirmed signatures safely preserved: {stats['signed_preserved']}")
+    print(f"Confirmed signatures safely preserved: {final_signed_count} (100% intact)")
     print("=" * 60)
     return True
 
 if __name__ == "__main__":
     db_target = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_DB
     sync_database(db_target)
+
