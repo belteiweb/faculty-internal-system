@@ -162,7 +162,7 @@ export default function Index({
                             autoFocus={initialState}
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Enter ID (e.g. 55984) or Name..."
+                            placeholder="Enter Name or ID"
                             className="w-full pl-10 pr-9 py-2.5 sm:py-3 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#C1AA3F] focus:ring-3 focus:ring-[#C1AA3F]/20 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all font-medium"
                         />
                         {search && (
