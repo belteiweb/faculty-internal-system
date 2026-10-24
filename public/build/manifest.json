@@ -1,45 +1,45 @@
 {
-  "_Navbar-DJ9b7n7k.js": {
-    "file": "assets/Navbar-DJ9b7n7k.js",
+  "_Navbar-7_XCr0AT.js": {
+    "file": "assets/Navbar-7_XCr0AT.js",
     "name": "Navbar",
     "imports": [
-      "_lock-DQ57vRej.js",
+      "_lock-yErnUkLy.js",
       "resources/js/app.jsx"
     ]
   },
-  "_StudentDetailModal-BveDSlrE.js": {
-    "file": "assets/StudentDetailModal-BveDSlrE.js",
+  "_StudentDetailModal-Ccd9PfwU.js": {
+    "file": "assets/StudentDetailModal-Ccd9PfwU.js",
     "name": "StudentDetailModal",
     "imports": [
-      "_lock-DQ57vRej.js",
+      "_lock-yErnUkLy.js",
       "resources/js/app.jsx",
-      "_Navbar-DJ9b7n7k.js",
-      "_shield-check-CBW2wC6q.js"
+      "_Navbar-7_XCr0AT.js",
+      "_shield-check-CJoyNB-Z.js"
     ]
   },
-  "_circle-alert-DdqeTZ3g.js": {
-    "file": "assets/circle-alert-DdqeTZ3g.js",
+  "_circle-alert-CbxWaqzu.js": {
+    "file": "assets/circle-alert-CbxWaqzu.js",
     "name": "circle-alert",
     "imports": [
-      "_lock-DQ57vRej.js"
+      "_lock-yErnUkLy.js"
     ]
   },
-  "_lock-DQ57vRej.js": {
-    "file": "assets/lock-DQ57vRej.js",
+  "_lock-yErnUkLy.js": {
+    "file": "assets/lock-yErnUkLy.js",
     "name": "lock",
     "imports": [
       "resources/js/app.jsx"
     ]
   },
-  "_shield-check-CBW2wC6q.js": {
-    "file": "assets/shield-check-CBW2wC6q.js",
+  "_shield-check-CJoyNB-Z.js": {
+    "file": "assets/shield-check-CJoyNB-Z.js",
     "name": "shield-check",
     "imports": [
-      "_lock-DQ57vRej.js"
+      "_lock-yErnUkLy.js"
     ]
   },
   "resources/css/app.css": {
-    "file": "assets/app-Dd9eeS54.css",
+    "file": "assets/app-CgYXbWvV.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -48,69 +48,69 @@
     ]
   },
   "resources/js/Pages/Auth/Login.jsx": {
-    "file": "assets/Login-BxOzJb3J.js",
+    "file": "assets/Login-qFbvwYYV.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_shield-check-CBW2wC6q.js",
-      "_circle-alert-DdqeTZ3g.js",
-      "_lock-DQ57vRej.js"
+      "_shield-check-CJoyNB-Z.js",
+      "_circle-alert-CbxWaqzu.js",
+      "_lock-yErnUkLy.js"
     ],
     "css": [
-      "assets/app-Dd9eeS54.css"
+      "assets/app-CgYXbWvV.css"
     ]
   },
   "resources/js/Pages/Controller/Dashboard.jsx": {
-    "file": "assets/Dashboard-BPzfG8XA.js",
+    "file": "assets/Dashboard-vP7CnwoE.js",
     "name": "Dashboard",
     "src": "resources/js/Pages/Controller/Dashboard.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-DJ9b7n7k.js",
-      "_StudentDetailModal-BveDSlrE.js",
-      "_lock-DQ57vRej.js",
-      "_shield-check-CBW2wC6q.js"
+      "_Navbar-7_XCr0AT.js",
+      "_StudentDetailModal-Ccd9PfwU.js",
+      "_lock-yErnUkLy.js",
+      "_shield-check-CJoyNB-Z.js"
     ],
     "css": [
-      "assets/app-Dd9eeS54.css"
+      "assets/app-CgYXbWvV.css"
     ]
   },
   "resources/js/Pages/Controller/Reports.jsx": {
-    "file": "assets/Reports-CpuR5XVB.js",
+    "file": "assets/Reports-CIyY3PRH.js",
     "name": "Reports",
     "src": "resources/js/Pages/Controller/Reports.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-DJ9b7n7k.js",
-      "_lock-DQ57vRej.js"
+      "_Navbar-7_XCr0AT.js",
+      "_lock-yErnUkLy.js"
     ],
     "css": [
-      "assets/app-Dd9eeS54.css"
+      "assets/app-CgYXbWvV.css"
     ]
   },
   "resources/js/Pages/Thesis/Index.jsx": {
-    "file": "assets/Index-CEyNJXM6.js",
+    "file": "assets/Index-Dx4HCyzd.js",
     "name": "Index",
     "src": "resources/js/Pages/Thesis/Index.jsx",
     "isDynamicEntry": true,
     "imports": [
       "resources/js/app.jsx",
-      "_Navbar-DJ9b7n7k.js",
-      "_lock-DQ57vRej.js",
-      "_StudentDetailModal-BveDSlrE.js",
-      "_circle-alert-DdqeTZ3g.js",
-      "_shield-check-CBW2wC6q.js"
+      "_Navbar-7_XCr0AT.js",
+      "_lock-yErnUkLy.js",
+      "_StudentDetailModal-Ccd9PfwU.js",
+      "_circle-alert-CbxWaqzu.js",
+      "_shield-check-CJoyNB-Z.js"
     ],
     "css": [
-      "assets/app-Dd9eeS54.css"
+      "assets/app-CgYXbWvV.css"
     ]
   },
   "resources/js/app.jsx": {
-    "file": "assets/app-CJLlixfG.js",
+    "file": "assets/app-CcW8CfvZ.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
@@ -121,7 +121,7 @@
       "resources/js/Pages/Thesis/Index.jsx"
     ],
     "css": [
-      "assets/app-Dd9eeS54.css"
+      "assets/app-CgYXbWvV.css"
     ]
   }
 }

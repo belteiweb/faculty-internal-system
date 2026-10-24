@@ -1,0 +1,37 @@
+[
+  {
+    "session_id": 91,
+    "camp": "ទីតាំងទី២ ស្ពានអាកាស ចោមចៅ",
+    "maj": "International Business",
+    "shift": "Eve1",
+    "batch": "2024-2025 Batch: XII"
+  },
+  {
+    "session_id": 92,
+    "camp": "ទីតាំងទី១ ទួលស្លែង",
+    "maj": "International Relations",
+    "shift": "Eve1",
+    "batch": "2024-2025 Batch: XII"
+  },
+  {
+    "session_id": 93,
+    "camp": "ទីតាំងទី១ ទួលស្លែង",
+    "maj": "International Relations",
+    "shift": "SS1",
+    "batch": "2024-2025 Batch: XII"
+  },
+  {
+    "session_id": 94,
+    "camp": "ទីតាំងទី១ ទួលស្លែង",
+    "maj": "International Relations",
+    "shift": "Eve1",
+    "batch": "2023-2024 Batch: XI"
+  },
+  {
+    "session_id": 95,
+    "camp": "ទីតាំងទី១ ទួលស្លែង",
+    "maj": "International Relations",
+    "shift": "SS1",
+    "batch": "2023-2024 Batch: XI"
+  }
+]
