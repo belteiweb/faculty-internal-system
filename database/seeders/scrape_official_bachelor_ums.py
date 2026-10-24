@@ -88,10 +88,11 @@ def scrape_all_sessions(sessions):
 
     for idx, s in enumerate(sessions):
         sid = s["id"]
-        print(f"\n[{idx+1}/{len(sessions)}] Scraping Session {sid}: {s['campus_code']} | {s['class_code']} ({s['major_name']}) ...")
+        print(f"[{idx+1:2d}/{len(sessions)}] Session {sid:2d}: {s['campus_code']} | {s['class_code']} ({s['major_name']}) ...")
         
         students_dict = {}
         group_supervisors = {}
+        student_assigned_group = {}
 
         # 1. Manage Page
         url_manage = f"https://ums.beltei.edu.kh/research-education/thesis/manage/{sid}"
@@ -100,21 +101,30 @@ def scrape_all_sessions(sessions):
         tables_m = soup_m.find_all("table")
 
         if len(tables_m) > 1:
-            # Table 2: Supervisor groups
-            for r in tables_m[1].find_all("tr")[1:]:
-                tds = r.find_all("td")
-                if len(tds) >= 4:
-                    grp_text = clean_text(tds[0].get_text())
-                    grp_m = re.search(r'\d+', grp_text)
-                    if grp_m:
-                        grp_num = int(grp_m.group(0))
-                        sup_raw = clean_text(tds[1].get_text())
-                        sup_clean = re.sub(r'Lecturer|Professor|Dr\.|Assistant', '', sup_raw, flags=re.I).strip()
-                        sup_phone = clean_text(tds[2].get_text())
-                        group_supervisors[grp_num] = {
-                            "name": sup_clean,
-                            "phone": sup_phone
-                        }
+            sup_table = tables_m[1]
+            tbody = sup_table.find("tbody")
+            if tbody:
+                direct_trs = tbody.find_all("tr", recursive=False)
+                current_sup = None
+                for tr in direct_trs:
+                    tds = tr.find_all("td", recursive=False)
+                    if len(tds) >= 3 and tds[0].get_text(strip=True).isdigit():
+                        grp_num = int(tds[0].get_text(strip=True))
+                        name_el = tds[1].find("div", class_="font-weight-semibold")
+                        sup_name = clean_text(name_el.get_text()) if name_el else clean_text(tds[1].get_text())
+                        sup_name = re.sub(r'Lecturer|Professor|Dr\.|Assistant|Office Staff|Dean|Vice Dean', '', sup_name, flags=re.I).strip()
+                        phone = clean_text(tds[2].get_text())
+                        
+                        current_sup = {"name": sup_name, "phone": phone, "group_no": grp_num}
+                        group_supervisors[grp_num] = current_sup
+
+                    # If this is the detail card row, find all assigned student IDs
+                    if current_sup and len(tds) == 1:
+                        card_text = tds[0].get_text()
+                        st_ids = re.findall(r'\b000\d{5}\b|\b[56]\d{4}\b', card_text)
+                        for sid_match in st_ids:
+                            num_id = str(int(sid_match)) if sid_match.isdigit() else sid_match
+                            student_assigned_group[num_id] = current_sup
 
         if tables_m:
             # Table 1: Students
@@ -138,9 +148,12 @@ def scrape_all_sessions(sessions):
                     grp_m = re.search(r'\d+', group_text)
                     group_no = int(grp_m.group(0)) if grp_m else None
 
-                    sup_info = group_supervisors.get(group_no, {})
+                    # Supervisor info from card or group
+                    sup_info = student_assigned_group.get(num_id) or group_supervisors.get(group_no, {})
                     sup_name = sup_info.get("name", "")
                     sup_phone = sup_info.get("phone", "")
+                    if not group_no and sup_info.get("group_no"):
+                        group_no = sup_info.get("group_no")
 
                     students_dict[num_id] = {
                         "session_id": sid,
@@ -172,6 +185,12 @@ def scrape_all_sessions(sessions):
         resp_t = requests.get(url_topics, cookies=cookies, headers=headers_html)
         soup_t = BeautifulSoup(resp_t.text, "html.parser")
         t_table = soup_t.find("table")
+        
+        # Track last seen supervisor in topic table for rows where cell was visually merged
+        last_topic_sup_name = ""
+        last_topic_sup_phone = ""
+        last_topic_grp = None
+
         if t_table:
             for r in t_table.find_all("tr")[1:]:
                 tds = r.find_all("td")
@@ -195,21 +214,34 @@ def scrape_all_sessions(sessions):
 
                     grp_str = clean_text(tds[5].get_text())
                     grp_m = re.search(r'\d+', grp_str)
-                    group_no = int(grp_m.group(0)) if grp_m else None
+                    row_grp = int(grp_m.group(0)) if grp_m else None
 
                     sup_text = clean_text(tds[6].get_text())
-                    phone_match = re.search(r'(\+?\d[\d\s\/\-]{7,})', sup_text)
-                    sup_phone = phone_match.group(0).strip() if phone_match else ""
-                    sup_name = clean_text(sup_text.replace(sup_phone, ""))
+                    if sup_text:
+                        phone_match = re.search(r'(\+?\d[\d\s\/\-]{7,})', sup_text)
+                        sup_phone = phone_match.group(0).strip() if phone_match else ""
+                        sup_name = clean_text(sup_text.replace(sup_phone, ""))
+                        # Check it's not numbers
+                        if not re.match(r'^\d+$', sup_name):
+                            last_topic_sup_name = sup_name
+                            last_topic_sup_phone = sup_phone
+                            last_topic_grp = row_grp
+                    elif row_grp == last_topic_grp and last_topic_sup_name:
+                        sup_name = last_topic_sup_name
+                        sup_phone = last_topic_sup_phone
+                    else:
+                        sup_name = ""
+                        sup_phone = ""
 
                     if num_id in students_dict:
                         if topic_title:
                             students_dict[num_id]["topic_title"] = topic_title
                         if questions:
                             students_dict[num_id]["topic_questions"] = questions
-                        if group_no and not students_dict[num_id]["group_no"]:
-                            students_dict[num_id]["group_no"] = group_no
-                        if sup_name:
+                        if row_grp and not students_dict[num_id]["group_no"]:
+                            students_dict[num_id]["group_no"] = row_grp
+                        # Update supervisor name if valid text
+                        if sup_name and not re.match(r'^\d+$', sup_name):
                             students_dict[num_id]["supervisor_name"] = sup_name
                         if sup_phone:
                             students_dict[num_id]["supervisor_phone"] = sup_phone
@@ -238,7 +270,6 @@ def scrape_all_sessions(sessions):
                         students_dict[num_id]["score"] = score
                         students_dict[num_id]["result_status"] = res_status
 
-        print(f"   Done: {len(students_dict)} students extracted (expected: {s['expected_students']})")
         all_students.extend(students_dict.values())
         time.sleep(0.3)
 
@@ -246,11 +277,23 @@ def scrape_all_sessions(sessions):
 
 if __name__ == "__main__":
     sessions = get_bachelor_sessions()
-    print(f"Starting extraction of {len(sessions)} Bachelor sessions...")
+    print(f"Scraping all {len(sessions)} sessions with accurate supervisor parsing...")
     students = scrape_all_sessions(sessions)
-    print(f"\n==========================================")
-    print(f"TOTAL STUDENTS EXTRACTED: {len(students)}")
-    
+    print(f"\nTotal extracted: {len(students)}")
+
+    # Verify supervisor names
+    invalid_sups = [s for s in students if re.match(r'^\d+$', s['supervisor_name']) or not s['supervisor_name']]
+    print(f"Invalid / empty supervisor count: {len(invalid_sups)}")
+    if invalid_sups:
+        for s in invalid_sups[:10]:
+            print("  Invalid:", s['student_id'], s['name_latin'], s['class_code'], "Sup:", s['supervisor_name'])
+
+    # Check BE KEABIN
+    bk = [s for s in students if s['student_id'] == '58076']
+    if bk:
+        print("\nBE KEABIN:", bk[0]['student_id'], bk[0]['name_latin'], "Supervisor:", bk[0]['supervisor_name'], "Phone:", bk[0]['supervisor_phone'])
+
+    # Save to json
     out_file = "d:/Project/Faculty-System/database/seeders/official_bachelor_thesis_students.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump({
@@ -258,4 +301,4 @@ if __name__ == "__main__":
             "sessions": sessions,
             "students": students
         }, f, ensure_ascii=False, indent=2)
-    print(f"Saved dataset to: {out_file}")
+    print(f"Saved dataset to {out_file}")
